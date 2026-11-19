@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tejal Mehta Lab, Institute of Pharmacy, Nirma University</title>
+<meta name="description" content="Prof. Tejal Mehta's research group in the Department of Pharmaceutics, Institute of Pharmacy, Nirma University, Ahmedabad: modified and site-specific drug delivery systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* OD-LAYOUT-PRIMITIVES v1 — structure only: display, flex/grid, overflow, wrapping, ratio, geometry.
+   Put this @layer first; product CSS outside the layer wins ordinary layout rules.
+   Native hidden and closed-dialog states take precedence over component display rules. */
+@layer od-layout {
+  [hidden]:not([hidden="until-found" i]) { display: none !important; }
+  dialog:not([open]) { display: none !important; }
+
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
+
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
+
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
+
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
+
+  .od-icon { display: inline-block; inline-size: var(--od-icon-size, 1em); block-size: var(--od-icon-size, 1em); flex: none; }
+
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }
+  .od-nowrap  { white-space: nowrap; }
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; }
+
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
+
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+:root [hidden]:where(:not([hidden="until-found" i])) { display: none; }
+/* /OD-LAYOUT-PRIMITIVES v1 */
+
+/* Tejal Mehta Lab, home page, scroll edition.
+   Cool white ground, blue-black ink, wide Anek Latin headings, one colour plus one shape per theme.
+   Every colour, size and duration is a token here. */
+:root {
+  color-scheme: light;
+  --ground: #F5F7F8;       /* cool white, never cream */
+  --surface: #FFFFFF;
+  --ink: #0D1B2A;          /* blue-black, 16:1 on ground */
+  --muted: #4A5866;        /* 6.7:1 on ground */
+  --rule: #D5DCE2;
+  --pubmed: #DCE3E8;       /* PubMed column fill in the timeline */
+
+  /* themes: colour + shape, every colour 4.5:1 or better on ground */
+  --t-oral: #C2410C;       /* circle */
+  --t-site: #0F5C43;       /* square */
+  --t-carriers: #2B4ACB;   /* triangle */
+  --t-sol: #8A5A00;        /* diamond */
+  --t-rev: #4A5866;        /* ring */
+
+  /* dark band (oral cancer, footer) */
+  --night: #0D1B2A;
+  --on-night: #F5F7F8;
+  --night-muted: #A9B6C2;  /* 8.4:1 on night */
+  --oral-light: #F07A4A;   /* 6.2:1 on night */
+  --night-line: #2A3A4B;
+
+  --font-display: "Anek Latin", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4", "Iowan Old Style", Charter, Georgia, serif;
+  --wide: "wdth" 118;
+  --wider: "wdth" 125;
+
+  --text-xs: 0.875rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 2.8vw, 2.375rem);
+  --text-3xl: clamp(2.25rem, 4.4vw, 3.75rem);
+  --text-hero: clamp(3rem, 6.6vw, 6.75rem);
+  --text-numeral: clamp(3.5rem, 7.5vw, 7rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 90rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --radius: 4px;
+
+  --dur-fast: 150ms;
+  --dur: 240ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; scrollbar-color: var(--muted) var(--ground); }
+body { margin: 0; overflow-x: clip; background: var(--ground); color: var(--ink); font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6; font-optical-sizing: auto; caret-color: var(--t-carriers); }
+::selection { background: var(--ink); color: var(--ground); }
+h1, h2, h3, h4 { font-family: var(--font-display); margin: 0; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+p { margin: 0; text-wrap: pretty; }
+ul, ol, dl, dd { margin: 0; padding: 0; list-style: none; }
+figure { margin: 0; }
+img { max-width: 100%; }
+button { font: inherit; color: inherit; }
+
+a { color: var(--ink); text-decoration-line: underline; text-decoration-thickness: 1px; text-decoration-color: var(--muted); text-underline-offset: 0.22em; transition: text-decoration-color var(--dur-fast) var(--ease-out), text-decoration-thickness var(--dur-fast) var(--ease-out); }
+a:hover { text-decoration-color: var(--ink); text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--t-carriers); outline-offset: 3px; border-radius: 2px; }
+.night { background: var(--night); color: var(--on-night); }
+.night a { color: var(--on-night); text-decoration-color: var(--night-muted); }
+.night a:hover { text-decoration-color: var(--on-night); }
+.night :focus-visible { outline-color: var(--oral-light); }
+.night ::selection { background: var(--on-night); color: var(--night); }
+
+.skip { position: absolute; left: var(--space-4); top: -4rem; background: var(--ink); color: var(--ground); padding: var(--space-2) var(--space-4); z-index: 5; font-family: var(--font-display); }
+.skip:focus { top: var(--space-2); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.wrap { max-width: var(--container-max); margin-inline: auto; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+
+.kicker-free-h { font-size: var(--text-3xl); font-weight: 700; font-variation-settings: var(--wide); line-height: 0.98; letter-spacing: -0.02em; }
+
+/* Theme shapes: colour is never the only cue */
+.shape { display: inline-block; flex: none; width: var(--s, 0.875rem); height: var(--s, 0.875rem); background: var(--c, var(--ink)); }
+.shape.oral { --c: var(--t-oral); border-radius: 50%; }
+.shape.site { --c: var(--t-site); }
+.shape.carriers { --c: var(--t-carriers); clip-path: polygon(50% 4%, 100% 96%, 0 96%); }
+.shape.solubility { --c: var(--t-sol); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.shape.reviews { background: transparent; border: 2.5px solid var(--t-rev); border-radius: 50%; }
+
+/* ---------- Header ---------- */
+.site-head .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-8); padding-block: var(--space-5); border-bottom: 1px solid var(--rule); }
+.site-head .inst { text-decoration: none; display: grid; gap: 0; font-family: var(--font-display); line-height: 1.25; }
+.site-head .inst b { display: block; font-weight: 700; font-variation-settings: var(--wide); font-size: var(--text-lg); }
+.site-head .inst span { display: block; font-size: var(--text-sm); color: var(--muted); }
+.site-head nav ul { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); }
+.site-head nav a { display: inline-block; padding-block: var(--space-2); font-family: var(--font-display); font-weight: 560; text-decoration-color: transparent; white-space: nowrap; }
+.site-head nav a:hover { text-decoration-color: var(--ink); }
+
+/* ---------- Opening: the mill ---------- */
+.mill.is-pinned { height: 250vh; }
+.mill-stick { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-8) var(--space-12); align-items: center; padding-block: var(--space-12) var(--space-16); }
+.mill.is-pinned .mill-stick { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; padding-block: var(--space-8); }
+.mill h1 { font-size: var(--text-hero); font-weight: 760; font-variation-settings: var(--wider); line-height: 0.9; letter-spacing: -0.035em; }
+.mill h1 span { display: block; }
+.mill .what { margin-top: var(--space-8); font-family: var(--font-display); font-weight: 600; font-variation-settings: var(--wide); font-size: var(--text-xl); line-height: 1.2; max-width: 26ch; }
+.mill .lede { margin-top: var(--space-4); font-size: var(--text-lg); line-height: 1.5; color: var(--muted); max-width: 44ch; }
+.mill .pi { margin-top: var(--space-8); display: grid; gap: var(--space-1); font-family: var(--font-display); }
+.mill .pi b { display: block; font-size: var(--text-lg); font-weight: 700; }
+.mill .pi span { display: block; color: var(--muted); }
+
+.field { display: grid; gap: var(--space-4); }
+.field-frame { position: relative; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); height: clamp(18rem, 58vh, 38rem); }
+.field-frame canvas { display: block; width: 100%; height: 100%; }
+.field-frame .static { display: block; width: 100%; height: 100%; }
+.static .s-line { fill: none; stroke: var(--ink); }
+.static .s-wash { fill: color-mix(in oklab, var(--ink) 6%, transparent); }
+.static .s-dot { fill: var(--ink); }
+.static .s-ring { fill: none; stroke: var(--t-sol); }
+.mill.is-live .field-frame .static { display: none; }
+.mill:not(.is-live) .field-frame canvas { display: none; }
+.readout { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2) var(--space-6); align-items: end; font-family: var(--font-display); }
+.readout .ro-text { display: grid; gap: 0; }
+.readout .ro-label { display: block; font-size: var(--text-sm); color: var(--muted); }
+.readout .ro-val { display: block; font-size: var(--text-numeral); font-weight: 760; font-variation-settings: var(--wide); line-height: 0.92; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--t-sol); }
+.readout .ro-hint { display: block; font-size: var(--text-sm); font-weight: 600; color: var(--muted); text-align: right; white-space: nowrap; }
+.ro-track { grid-column: 1 / -1; height: 4px; background: var(--rule); }
+.ro-fill { display: block; height: 100%; background: var(--t-sol); transform-origin: left center; transform: scaleX(var(--p, 0)); }
+.mill:not(.is-live) .readout { display: none; }
+.field figcaption { font-size: var(--text-sm); color: var(--muted); max-width: 64ch; }
+.field figcaption a { color: var(--muted); }
+
+/* ---------- Where a dose goes ---------- */
+.journey { padding-block: var(--space-24) var(--space-16); border-top: 1px solid var(--rule); }
+.journey-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-6) var(--space-16); align-items: end; }
+.journey-head p { font-size: var(--text-lg); line-height: 1.5; color: var(--muted); max-width: 50ch; }
+.journey-body { margin-top: var(--space-16); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-16); }
+.stage { display: none; }
+
+.step { --acc: var(--ink); display: grid; gap: var(--space-5); }
+.step .count { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--muted); display: flex; align-items: center; gap: var(--space-2); }
+.step h3 { font-size: var(--text-3xl); font-weight: 720; font-variation-settings: var(--wide); line-height: 0.98; letter-spacing: -0.02em; transition: color var(--dur) var(--ease-out); }
+.step .form { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 560; line-height: 1.25; max-width: 30ch; }
+.step .result { display: grid; gap: var(--space-1); padding-top: var(--space-4); border-top: 2px solid var(--acc); max-width: 34rem; }
+.step .result b { display: block; font-family: var(--font-display); font-size: var(--text-numeral); font-weight: 760; font-variation-settings: var(--wide); line-height: 0.92; letter-spacing: -0.03em; color: var(--acc); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.step .result span { display: block; color: var(--muted); max-width: 46ch; }
+.step .papers { display: grid; gap: var(--space-3); max-width: 40rem; }
+.step .papers li { display: grid; gap: var(--space-1); padding-left: var(--space-4); border-left: 2px solid var(--rule); }
+.step .papers a { display: block; font-family: var(--font-display); font-weight: 560; font-size: var(--text-base); line-height: 1.3; }
+.step .papers span { display: block; font-size: var(--text-sm); color: var(--muted); }
+
+.step-fig { background: color-mix(in oklab, var(--acc) 7%, var(--surface)); border: 1px solid color-mix(in oklab, var(--acc) 22%, var(--rule)); border-radius: var(--radius); padding: var(--space-6); display: grid; gap: var(--space-4); }
+.step-fig svg { display: block; width: 100%; height: auto; max-height: 22rem; }
+.step-fig .ink { stroke: var(--ink); fill: none; }
+.step-fig .ink-fill { fill: var(--ink); }
+.step-fig .acc { stroke: var(--acc); fill: none; }
+.step-fig .acc-fill { fill: var(--acc); }
+.step-fig .acc-wash { fill: color-mix(in oklab, var(--acc) 14%, var(--surface)); stroke: var(--acc); }
+.step-fig .soft { stroke: var(--muted); fill: none; }
+.step-fig .soft-fill { fill: color-mix(in oklab, var(--muted) 14%, var(--surface)); stroke: var(--muted); }
+.step-fig ul { display: grid; gap: var(--space-1); font-family: var(--font-display); font-size: var(--text-sm); }
+.step-fig li { display: flex; align-items: baseline; gap: var(--space-2); }
+.step-fig li::before { content: ""; flex: none; width: 0.75rem; height: 2px; background: var(--acc); transform: translateY(-0.25em); }
+.step-fig .fig-title { font-family: var(--font-display); font-weight: 700; font-variation-settings: var(--wide); font-size: var(--text-lg); color: var(--acc); }
+.stage .step-fig.enter { animation: fig-in var(--dur) var(--ease-out); }
+@keyframes fig-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Oral cancer centrepiece ---------- */
+.flagship { padding-block: var(--space-24); }
+.flag-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-12) var(--space-16); align-items: start; }
+.flag-label { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 600; color: var(--oral-light); }
+.flag-label .shape { --c: var(--oral-light); }
+.flagship h2 { margin-top: var(--space-4); font-size: var(--text-3xl); font-weight: 720; font-variation-settings: var(--wide); line-height: 1; letter-spacing: -0.02em; }
+.flagship .body { margin-top: var(--space-6); max-width: 56ch; color: var(--on-night); }
+.grant { margin-top: var(--space-10); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); border-top: 1px solid var(--night-line); padding-top: var(--space-6); }
+.grant div { display: grid; gap: var(--space-1); }
+.grant dt { font-family: var(--font-display); font-size: var(--text-sm); color: var(--night-muted); }
+.grant dd { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; line-height: 1.3; }
+.grant .big { font-size: var(--text-2xl); font-weight: 720; font-variation-settings: var(--wide); color: var(--oral-light); white-space: nowrap; }
+.flag-paper { margin-top: var(--space-8); display: grid; gap: var(--space-1); font-size: var(--text-sm); color: var(--night-muted); }
+.flag-paper a { display: block; font-family: var(--font-display); font-weight: 560; font-size: var(--text-base); line-height: 1.3; }
+.bars h3 { font-size: var(--text-xl); font-weight: 700; font-variation-settings: var(--wide); }
+.bars .sub { margin-top: var(--space-2); color: var(--night-muted); }
+.bars ol { margin-top: var(--space-8); display: grid; gap: var(--space-8); }
+.bars li { display: grid; gap: var(--space-2); }
+.bars .lab { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); font-family: var(--font-display); }
+.bars .lab span { color: var(--night-muted); }
+.bars .lab b { font-size: var(--text-2xl); font-weight: 720; font-variation-settings: var(--wide); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bars .track { height: 0.75rem; background: var(--night-line); border-radius: 999px; }
+.bars .fill { display: block; height: 100%; width: 100%; border-radius: 999px; background: var(--night-muted); transform-origin: left center; transform: scaleX(var(--v)); }
+.bars li.best .fill { background: var(--oral-light); }
+.bars li.best .lab span { color: var(--on-night); }
+.bars li.best .lab b { color: var(--oral-light); font-size: var(--text-3xl); }
+.bars .axis { margin-top: var(--space-3); display: flex; justify-content: space-between; font-family: var(--font-display); font-size: var(--text-xs); color: var(--night-muted); font-variant-numeric: tabular-nums; }
+.bars figcaption { margin-top: var(--space-4); font-size: var(--text-sm); color: var(--night-muted); }
+
+/* ---------- Publications ---------- */
+.pubs { padding-block: var(--space-24); }
+.pubs-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-6) var(--space-16); align-items: end; }
+.pubs-head p { font-size: var(--text-lg); line-height: 1.5; color: var(--muted); max-width: 52ch; }
+
+.filters { margin-top: var(--space-12); display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.chip { appearance: none; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); line-height: 1.2; transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+.chip[aria-pressed="true"] .shape.reviews { border-color: var(--ground); }
+.chip .c { font-variant-numeric: tabular-nums; color: inherit; opacity: 0.75; }
+
+.timeline { margin-top: var(--space-8); background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--space-6); display: grid; gap: var(--space-5); }
+.tl-scroll { overflow-x: auto; padding-bottom: var(--space-2); }
+.tl-cols { display: grid; grid-template-columns: repeat(16, minmax(2.75rem, 1fr)); gap: var(--space-1); min-width: 46rem; }
+.tl-col { display: grid; grid-template-rows: 15rem auto; gap: var(--space-2); }
+.tl-marks { display: flex; flex-direction: column-reverse; align-items: center; justify-content: flex-start; gap: 0; background: linear-gradient(to top, var(--pubmed) var(--h), transparent var(--h)); border-bottom: 2px solid var(--ink); border-radius: 2px 2px 0 0; }
+.tl-year { display: block; text-align: center; font-family: var(--font-display); font-size: var(--text-xs); font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mark { appearance: none; cursor: pointer; border: 0; background: transparent; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border-radius: 50%; transition: opacity var(--dur) var(--ease-out); }
+.mark .shape { --s: 1.125rem; transition: transform var(--dur-fast) var(--ease-out); }
+.mark:hover .shape, .mark:focus-visible .shape { transform: scale(1.3); }
+.mark[aria-pressed="true"] { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+.mark[aria-pressed="true"] .shape { transform: scale(1.4); }
+.mark.dim { opacity: 0.2; }
+.tl-legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-8); font-size: var(--text-sm); color: var(--muted); }
+.tl-legend span { display: inline-flex; align-items: center; gap: var(--space-2); }
+.tl-legend .swatch { display: inline-block; width: 1rem; height: 0.75rem; background: var(--pubmed); }
+.tl-readout { min-height: 6.5rem; border-top: 1px solid var(--rule); padding-top: var(--space-4); display: grid; gap: var(--space-1); align-content: start; }
+.tl-readout .rk { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--muted); }
+.tl-readout a { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--text-xl); line-height: 1.2; max-width: 60ch; }
+.tl-readout .rs { display: block; font-size: var(--text-sm); color: var(--muted); }
+.tl-readout .rempty { color: var(--muted); }
+
+.list-bar { margin-top: var(--space-12); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-2) var(--space-6); padding-bottom: var(--space-3); border-bottom: 2px solid var(--ink); }
+.list-bar h3 { font-size: var(--text-xl); font-weight: 700; font-variation-settings: var(--wide); }
+.list-bar h3:focus { outline: none; }
+.list-bar h3:focus-visible { outline: 2px solid var(--t-carriers); outline-offset: 3px; }
+.list-bar a { font-family: var(--font-display); font-weight: 600; }
+.pub-list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--space-12); }
+.pub-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-5); border-bottom: 1px solid var(--rule); align-items: start; }
+.pub-list .shape { margin-top: 0.4rem; }
+.pub-list .txt { display: grid; gap: var(--space-1); }
+.pub-list .yr { display: block; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pub-list a { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); line-height: 1.25; }
+.pub-list .src { display: block; font-size: var(--text-sm); color: var(--muted); }
+
+/* ---------- Profile ---------- */
+.profile { padding-block: var(--space-24); border-top: 1px solid var(--rule); }
+.profile-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-8) var(--space-12); align-items: end; }
+.portrait { width: min(14rem, 100%); }
+.portrait img { border-radius: var(--radius); }
+.profile h2 { font-size: var(--text-hero); font-weight: 760; font-variation-settings: var(--wider); line-height: 0.9; letter-spacing: -0.035em; }
+.profile h2 span { display: block; }
+.roles { margin-top: var(--space-6); display: grid; gap: var(--space-1); font-family: var(--font-display); }
+.roles span { display: block; }
+.roles span:first-child { font-size: var(--text-xl); font-weight: 650; line-height: 1.2; }
+.roles span + span { color: var(--muted); }
+.links { margin-top: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); font-family: var(--font-display); font-weight: 600; }
+.links a { display: inline-block; padding-block: var(--space-2); }
+
+.profile-body { margin-top: var(--space-16); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-12) var(--space-16); align-items: start; }
+.record div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; padding-block: var(--space-4); border-bottom: 1px solid var(--rule); }
+.record div:first-child { border-top: 2px solid var(--ink); }
+.record dt { order: 2; font-size: var(--text-base); color: var(--ink); line-height: 1.4; }
+.record dd { order: 1; font-family: var(--font-display); font-size: clamp(2.25rem, 3.6vw, 3.25rem); font-weight: 760; font-variation-settings: var(--wide); line-height: 0.95; letter-spacing: -0.02em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cv { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-10) var(--space-12); }
+.cv h3 { font-size: var(--text-lg); font-weight: 700; font-variation-settings: var(--wide); padding-bottom: var(--space-2); border-bottom: 2px solid var(--ink); }
+.cv li { padding-block: var(--space-3); border-bottom: 1px solid var(--rule); font-size: var(--text-sm); line-height: 1.45; color: var(--muted); }
+.cv li b { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); color: var(--ink); }
+.cv .wide { grid-column: 1 / -1; }
+.cv .proj { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-4); align-items: baseline; }
+.cv .proj b { display: block; }
+.cv .proj span { display: block; }
+.source-note { margin-top: var(--space-10); font-size: var(--text-xs); color: var(--muted); max-width: 80ch; }
+
+/* ---------- People: names set in type until roles and photographs exist ---------- */
+.people { padding-block: var(--space-24); border-top: 1px solid var(--rule); }
+.people .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-8) var(--space-16); align-items: start; }
+.people-head p { margin-top: var(--space-6); font-size: var(--text-lg); line-height: 1.5; color: var(--muted); max-width: 40ch; }
+.members { border-top: 2px solid var(--ink); }
+.members li { padding-block: var(--space-5); border-bottom: 1px solid var(--rule); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 680; font-variation-settings: var(--wide); line-height: 1.1; letter-spacing: -0.01em; }
+
+/* ---------- Join ---------- */
+.join { padding-block: var(--space-24); background: var(--surface); border-top: 1px solid var(--rule); }
+.join .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-12) var(--space-16); align-items: end; }
+.join h2 { font-size: var(--text-hero); font-weight: 760; font-variation-settings: var(--wider); line-height: 0.9; letter-spacing: -0.035em; }
+.join p { margin-top: var(--space-6); font-size: var(--text-lg); line-height: 1.5; max-width: 46ch; }
+.contact div { display: grid; gap: var(--space-1); padding-block: var(--space-4); border-bottom: 1px solid var(--rule); }
+.contact div:first-child { border-top: 2px solid var(--ink); }
+.contact dt { font-family: var(--font-display); font-size: var(--text-sm); color: var(--muted); }
+.contact dd { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.35; }
+.contact .phone { font-size: var(--text-3xl); font-weight: 720; font-variation-settings: var(--wide); line-height: 1; white-space: nowrap; text-decoration-color: var(--rule); }
+
+/* ---------- Footer ---------- */
+.site-foot { padding-block: var(--space-16) var(--space-12); font-size: var(--text-sm); }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); gap: var(--space-10); }
+.foot-name { display: block; font-family: var(--font-display); font-weight: 760; font-variation-settings: var(--wider); font-size: var(--text-2xl); line-height: 1; letter-spacing: -0.02em; margin-bottom: var(--space-4); }
+.foot-grid p { color: var(--night-muted); max-width: 40ch; }
+.foot-grid h2 { font-size: var(--text-base); font-weight: 700; color: var(--oral-light); margin-bottom: var(--space-3); }
+.foot-grid li + li { margin-top: var(--space-2); }
+.foot-grid a { font-family: var(--font-display); font-size: var(--text-base); }
+
+/* ---------- Wide screens: the pinned journey stage ---------- */
+@media (min-width: 64rem) {
+  .js .journey-body { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-16); align-items: start; }
+  .js .stage { display: block; position: sticky; top: 12vh; }
+  .js .steps .step-fig { display: none; }
+  .js .steps { display: grid; }
+  .js .step { min-height: 78vh; align-content: center; padding-block: var(--space-12); }
+  .js .step:not(.is-active) h3 { color: var(--muted); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 64rem) {
+  .mill-stick, .journey-head, .flag-grid, .pubs-head, .profile-body, .people .wrap, .join .wrap { grid-template-columns: minmax(0, 1fr); }
+  .pub-list { grid-template-columns: minmax(0, 1fr); }
+  .foot-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 48rem) {
+  .profile-top { grid-template-columns: minmax(0, 1fr); }
+  .cv { grid-template-columns: minmax(0, 1fr); }
+  .cv .proj { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+  .grant { grid-template-columns: minmax(0, 1fr); }
+  .record div { grid-template-columns: 6rem minmax(0, 1fr); }
+  .foot-grid { grid-template-columns: minmax(0, 1fr); }
+  .timeline { padding: var(--space-4); }
+  .readout .ro-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="inst" href="https://pharmacy.nirmauni.ac.in/">
+      <b>Department of Pharmaceutics</b>
+      <span>Institute of Pharmacy, Nirma University, Ahmedabad</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#journey">Research</a></li>
+        <li><a href="#oral-cancer">Oral cancer project</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#profile">Prof. Mehta</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#join">Join</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+
+  <section class="mill" id="mill" aria-labelledby="lab-h">
+    <div class="wrap mill-stick">
+      <div>
+        <h1 id="lab-h"><span>Tejal</span> <span>Mehta</span> <span>Lab</span></h1>
+        <p class="what">Modified and site&#8209;specific drug delivery systems</p>
+        <p class="lede">The group designs micro- and nanocarrier formulations for the oral cavity, the eye, the skin and the vaginal route, and improves the dissolution of poorly soluble drugs.</p>
+        <p class="pi"><b>Prof. Tejal Mehta</b><span>Professor and Head, Department of Pharmaceutics</span></p>
+      </div>
+
+      <figure class="field">
+        <div class="field-frame">
+          <canvas aria-hidden="true"></canvas>
+          <svg class="static" viewBox="0 0 640 420" role="img" aria-label="Two clotrimazole particles drawn to the same scale: one above 31 micrometres across before milling, and one 264 nanometres across after media milling, which shows as a tiny dot.">
+            <circle class="s-line" cx="230" cy="210" r="170" stroke-width="1.5"/>
+            <circle class="s-wash" cx="230" cy="210" r="170"/>
+            <circle class="s-dot" cx="520" cy="210" r="1.45"/>
+            <circle cx="520" cy="210" r="16" fill="none" class="s-ring" stroke-width="1.5" stroke-dasharray="3 4"/>
+          </svg>
+        </div>
+        <div class="readout" aria-hidden="true">
+          <div class="ro-text">
+            <span class="ro-label">Clotrimazole particle size, drawn to scale</span>
+            <span class="ro-val">31.0 µm</span>
+          </div>
+          <span class="ro-hint">Scroll to mill</span>
+          <div class="ro-track"><span class="ro-fill"></span></div>
+        </div>
+        <figcaption>Media milling took clotrimazole from above 31 µm to 264 nm, more than a hundredfold smaller across. From <a href="https://doi.org/10.1208/s12249-019-1368-1">Patel, Sharma and Mehta, AAPS PharmSciTech 2019</a>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="journey" id="journey" aria-labelledby="journey-h">
+    <div class="wrap">
+      <div class="journey-head">
+        <h2 class="kicker-free-h" id="journey-h">Where a dose goes</h2>
+        <p>Each route asks something different of a formulation: stay put in the mouth, get past the surface of the eye, hold a drug in the skin, cling to mucosa, or wait until the colon. Five stops, with the group's papers for each.</p>
+      </div>
+
+      <div class="journey-body">
+        <div class="stage"></div>
+
+        <ol class="steps">
+          <li class="step" id="step-mouth" style="--acc: var(--t-oral)">
+            <p class="count"><span class="shape oral" aria-hidden="true"></span>1 of 5</p>
+            <h3>Mouth</h3>
+            <p class="form">Erlotinib liposomal gel for oral squamous cell carcinoma; electrospun nanofibres for locoregional therapy.</p>
+            <p class="result"><b>55.27%</b><span>tumour volume reduction in vivo with chitosan-coated erlotinib liposomal gel, against 38.88% for plain erlotinib gel.</span></p>
+            <ul class="papers">
+              <li><a href="https://doi.org/10.1016/j.ijpharm.2023.123144">Localized delivery of erlotinib using liposomal gel formulations for the treatment of oral squamous cell carcinoma</a><span>2023, Int J Pharm</span></li>
+            </ul>
+            <figure class="step-fig">
+              <p class="fig-title">Liposomal gel</p>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Diagram: liposomes with a lipid bilayer and a chitosan coat, dispersed in a gel base.">
+                <rect class="acc-wash" x="20" y="70" width="360" height="160" rx="14" stroke-width="2"/>
+                <g stroke-width="2">
+                  <circle class="acc" cx="80" cy="130" r="26" stroke-dasharray="4 4"/><circle class="ink" cx="80" cy="130" r="19"/><circle class="ink" cx="80" cy="130" r="13"/><circle class="acc-fill" cx="80" cy="130" r="4"/>
+                  <circle class="acc" cx="160" cy="180" r="26" stroke-dasharray="4 4"/><circle class="ink" cx="160" cy="180" r="19"/><circle class="ink" cx="160" cy="180" r="13"/><circle class="acc-fill" cx="160" cy="180" r="4"/>
+                  <circle class="acc" cx="230" cy="120" r="26" stroke-dasharray="4 4"/><circle class="ink" cx="230" cy="120" r="19"/><circle class="ink" cx="230" cy="120" r="13"/><circle class="acc-fill" cx="230" cy="120" r="4"/>
+                  <circle class="acc" cx="300" cy="185" r="26" stroke-dasharray="4 4"/><circle class="ink" cx="300" cy="185" r="19"/><circle class="ink" cx="300" cy="185" r="13"/><circle class="acc-fill" cx="300" cy="185" r="4"/>
+                  <circle class="acc" cx="340" cy="110" r="20" stroke-dasharray="4 4"/><circle class="ink" cx="340" cy="110" r="14"/><circle class="ink" cx="340" cy="110" r="9"/><circle class="acc-fill" cx="340" cy="110" r="3"/>
+                </g>
+                <path class="soft" d="M20 40 H380" stroke-width="1.5" stroke-dasharray="2 6"/>
+              </svg>
+              <ul><li>Gel base, applied locally in the mouth</li><li>Liposome: drug inside a lipid bilayer</li><li>Dashed ring: chitosan coat</li></ul>
+            </figure>
+          </li>
+
+          <li class="step" id="step-eye" style="--acc: var(--t-carriers)">
+            <p class="count"><span class="shape carriers" aria-hidden="true"></span>2 of 5</p>
+            <h3>Eye</h3>
+            <p class="form">Drug nanocrystals, mesoporous silica nanoparticles, long-acting implants for macular degeneration.</p>
+            <ul class="papers">
+              <li><a href="https://doi.org/10.1080/03639045.2026.2691481">Next-generation drug delivery for age-related macular degeneration: promise of controlled release formulations</a><span>2026 review, Drug Dev Ind Pharm</span></li>
+              <li><a href="https://doi.org/10.1208/s12249-026-03426-2">Mesoporous silica nanoparticles for ocular drug delivery: synthesis, functionalization, and safety insights</a><span>2026 review, AAPS PharmSciTech</span></li>
+            </ul>
+            <figure class="step-fig">
+              <p class="fig-title">Mesoporous silica and nanocrystal</p>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Diagram: a mesoporous silica nanoparticle with a regular pattern of pores, and a faceted drug nanocrystal.">
+                <circle class="acc-wash" cx="140" cy="130" r="108" stroke-width="2"/>
+                <g class="acc-fill"><circle cx="110.0" cy="43.4" r="5.5"/><circle cx="130.0" cy="43.4" r="5.5"/><circle cx="150.0" cy="43.4" r="5.5"/><circle cx="170.0" cy="43.4" r="5.5"/><circle cx="80.0" cy="60.7" r="5.5"/><circle cx="100.0" cy="60.7" r="5.5"/><circle cx="120.0" cy="60.7" r="5.5"/><circle cx="140.0" cy="60.7" r="5.5"/><circle cx="160.0" cy="60.7" r="5.5"/><circle cx="180.0" cy="60.7" r="5.5"/><circle cx="200.0" cy="60.7" r="5.5"/><circle cx="70.0" cy="78.0" r="5.5"/><circle cx="90.0" cy="78.0" r="5.5"/><circle cx="110.0" cy="78.0" r="5.5"/><circle cx="130.0" cy="78.0" r="5.5"/><circle cx="150.0" cy="78.0" r="5.5"/><circle cx="170.0" cy="78.0" r="5.5"/><circle cx="190.0" cy="78.0" r="5.5"/><circle cx="210.0" cy="78.0" r="5.5"/><circle cx="60.0" cy="95.4" r="5.5"/><circle cx="80.0" cy="95.4" r="5.5"/><circle cx="100.0" cy="95.4" r="5.5"/><circle cx="120.0" cy="95.4" r="5.5"/><circle cx="140.0" cy="95.4" r="5.5"/><circle cx="160.0" cy="95.4" r="5.5"/><circle cx="180.0" cy="95.4" r="5.5"/><circle cx="200.0" cy="95.4" r="5.5"/><circle cx="220.0" cy="95.4" r="5.5"/><circle cx="50.0" cy="112.7" r="5.5"/><circle cx="70.0" cy="112.7" r="5.5"/><circle cx="90.0" cy="112.7" r="5.5"/><circle cx="110.0" cy="112.7" r="5.5"/><circle cx="130.0" cy="112.7" r="5.5"/><circle cx="150.0" cy="112.7" r="5.5"/><circle cx="170.0" cy="112.7" r="5.5"/><circle cx="190.0" cy="112.7" r="5.5"/><circle cx="210.0" cy="112.7" r="5.5"/><circle cx="230.0" cy="112.7" r="5.5"/><circle cx="60.0" cy="130.0" r="5.5"/><circle cx="80.0" cy="130.0" r="5.5"/><circle cx="100.0" cy="130.0" r="5.5"/><circle cx="120.0" cy="130.0" r="5.5"/><circle cx="140.0" cy="130.0" r="5.5"/><circle cx="160.0" cy="130.0" r="5.5"/><circle cx="180.0" cy="130.0" r="5.5"/><circle cx="200.0" cy="130.0" r="5.5"/><circle cx="220.0" cy="130.0" r="5.5"/><circle cx="50.0" cy="147.3" r="5.5"/><circle cx="70.0" cy="147.3" r="5.5"/><circle cx="90.0" cy="147.3" r="5.5"/><circle cx="110.0" cy="147.3" r="5.5"/><circle cx="130.0" cy="147.3" r="5.5"/><circle cx="150.0" cy="147.3" r="5.5"/><circle cx="170.0" cy="147.3" r="5.5"/><circle cx="190.0" cy="147.3" r="5.5"/><circle cx="210.0" cy="147.3" r="5.5"/><circle cx="230.0" cy="147.3" r="5.5"/><circle cx="60.0" cy="164.6" r="5.5"/><circle cx="80.0" cy="164.6" r="5.5"/><circle cx="100.0" cy="164.6" r="5.5"/><circle cx="120.0" cy="164.6" r="5.5"/><circle cx="140.0" cy="164.6" r="5.5"/><circle cx="160.0" cy="164.6" r="5.5"/><circle cx="180.0" cy="164.6" r="5.5"/><circle cx="200.0" cy="164.6" r="5.5"/><circle cx="220.0" cy="164.6" r="5.5"/><circle cx="70.0" cy="182.0" r="5.5"/><circle cx="90.0" cy="182.0" r="5.5"/><circle cx="110.0" cy="182.0" r="5.5"/><circle cx="130.0" cy="182.0" r="5.5"/><circle cx="150.0" cy="182.0" r="5.5"/><circle cx="170.0" cy="182.0" r="5.5"/><circle cx="190.0" cy="182.0" r="5.5"/><circle cx="210.0" cy="182.0" r="5.5"/><circle cx="80.0" cy="199.3" r="5.5"/><circle cx="100.0" cy="199.3" r="5.5"/><circle cx="120.0" cy="199.3" r="5.5"/><circle cx="140.0" cy="199.3" r="5.5"/><circle cx="160.0" cy="199.3" r="5.5"/><circle cx="180.0" cy="199.3" r="5.5"/><circle cx="200.0" cy="199.3" r="5.5"/><circle cx="110.0" cy="216.6" r="5.5"/><circle cx="130.0" cy="216.6" r="5.5"/><circle cx="150.0" cy="216.6" r="5.5"/><circle cx="170.0" cy="216.6" r="5.5"/></g>
+                <polygon class="soft-fill" points="320,80 363,105 363,155 320,180 277,155 277,105" stroke-width="2"/>
+                <path class="soft" d="M320 80 V180 M277 105 L363 155 M363 105 L277 155" stroke-width="1"/>
+              </svg>
+              <ul><li>Silica particle: drug held in its pores</li><li>Drug nanocrystal: the drug itself, milled to nanometre size</li></ul>
+            </figure>
+          </li>
+
+          <li class="step" id="step-skin" style="--acc: var(--t-carriers)">
+            <p class="count"><span class="shape carriers" aria-hidden="true"></span>3 of 5</p>
+            <h3>Skin</h3>
+            <p class="form">Tacrolimus nanoparticle hydrogel, clotrimazole lipid nanogel, betamethasone nanocrystals, silver nanoparticle wound film.</p>
+            <p class="result"><b>7-fold</b><span>higher water solubility of tacrolimus in phosphonate-functionalised mesoporous silica nanoparticles than free drug.</span></p>
+            <ul class="papers">
+              <li><a href="https://doi.org/10.1016/j.ijpharm.2021.121079">Tacrolimus encapsulated mesoporous silica nanoparticles embedded hydrogel for the treatment of atopic dermatitis</a><span>2021, Int J Pharm</span></li>
+              <li><a href="https://doi.org/10.1007/s13346-024-01685-9">Quality by design driven development of lipid nanoparticles for cutaneous targeting</a><span>2024, Drug Deliv Transl Res</span></li>
+              <li><a href="https://doi.org/10.1208/s12249-022-02346-1">Betamethasone dipropionate nanocrystals: investigation, feasibility and in vitro evaluation</a><span>2022, AAPS PharmSciTech</span></li>
+              <li><a href="https://doi.org/10.1016/j.xphs.2020.03.028">Formulation of chitosan stabilized silver nanoparticle-containing wound healing film</a><span>2020, J Pharm Sci</span></li>
+            </ul>
+            <figure class="step-fig">
+              <p class="fig-title">Nanoparticle hydrogel on skin</p>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Diagram: a hydrogel layer containing drug-loaded nanoparticles, resting on layered skin.">
+                <rect class="acc-wash" x="20" y="30" width="360" height="70" rx="10" stroke-width="2"/>
+                <g class="acc-fill"><circle cx="60" cy="65" r="8"/><circle cx="110" cy="52" r="8"/><circle cx="150" cy="78" r="8"/><circle cx="205" cy="58" r="8"/><circle cx="250" cy="80" r="8"/><circle cx="300" cy="55" r="8"/><circle cx="345" cy="75" r="8"/></g>
+                <g class="soft" stroke-width="1.5">
+                  <path d="M20 120 C80 112 140 128 200 120 S320 112 380 120"/>
+                  <path d="M20 142 C80 134 140 150 200 142 S320 134 380 142"/>
+                  <path d="M20 164 C80 156 140 172 200 164 S320 156 380 164"/>
+                </g>
+                <rect class="soft-fill" x="20" y="180" width="360" height="56" rx="6" stroke-width="1.5"/>
+                <g class="acc-fill" fill-opacity="0.6"><circle cx="130" cy="131" r="3"/><circle cx="215" cy="153" r="3"/><circle cx="290" cy="131" r="3"/></g>
+              </svg>
+              <ul><li>Hydrogel layer with drug-loaded nanoparticles</li><li>Outer skin layers, where the drug is meant to stay</li></ul>
+            </figure>
+          </li>
+
+          <li class="step" id="step-vaginal" style="--acc: var(--t-site)">
+            <p class="count"><span class="shape site" aria-hidden="true"></span>4 of 5</p>
+            <h3>Vaginal route</h3>
+            <p class="form">Clotrimazole mucoadhesive film; 3D-printed delivery systems.</p>
+            <ul class="papers">
+              <li><a href="https://doi.org/10.4103/2230-973X.176487">Formulation, development and characterization of mucoadhesive film for treatment of vaginal candidiasis</a><span>2016, Int J Pharm Investig</span></li>
+              <li><a href="https://doi.org/10.1080/17425247.2026.2727678">Vaginal drug delivery for precision therapy in polyendocrine metabolic ovarian syndrome</a><span>2026 review, Expert Opin Drug Deliv</span></li>
+            </ul>
+            <figure class="step-fig">
+              <p class="fig-title">Mucoadhesive film</p>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Diagram: a thin drug-loaded film adhering to a mucosal surface.">
+                <path class="acc-wash" d="M30 110 C110 92 290 92 370 110 L370 132 C290 114 110 114 30 132 Z" stroke-width="2"/>
+                <g class="acc-fill"><circle cx="80" cy="113" r="3.5"/><circle cx="130" cy="106" r="3.5"/><circle cx="180" cy="110" r="3.5"/><circle cx="230" cy="105" r="3.5"/><circle cx="280" cy="111" r="3.5"/><circle cx="325" cy="115" r="3.5"/></g>
+                <path class="soft" d="M20 150 C60 136 100 164 140 150 S220 136 260 150 S340 164 380 150" stroke-width="2"/>
+                <path class="soft-fill" d="M20 150 C60 136 100 164 140 150 S220 136 260 150 S340 164 380 150 L380 230 L20 230 Z" stroke-width="0"/>
+              </svg>
+              <ul><li>Thin film carrying dispersed drug</li><li>Mucosal surface the film adheres to</li></ul>
+            </figure>
+          </li>
+
+          <li class="step" id="step-gut" style="--acc: var(--t-site)">
+            <p class="count"><span class="shape site" aria-hidden="true"></span>5 of 5</p>
+            <h3>Gut and under the tongue</h3>
+            <p class="form">Colon, stomach, sublingual, and nose to brain.</p>
+            <p class="result"><b>7.2 h</b><span>for complete release from the colon-targeted metronidazole mini-tablets, with 6.99% released in the first 5 hours.</span></p>
+            <ul class="papers">
+              <li><a href="https://doi.org/10.3109/03639045.2015.1082581">Design of experiment approach for formulating multi-unit colon-targeted drug delivery system</a><span>2015, Drug Dev Ind Pharm</span></li>
+              <li><a href="https://doi.org/10.1517/17425247.2014.944861">Formulation optimization of gastroretentive drug delivery system for allopurinol using experimental design</a><span>2014, Expert Opin Drug Deliv</span></li>
+              <li><a href="https://doi.org/10.1208/s12249-021-02132-5">Development and optimization of asenapine sublingual film using QbD approach</a><span>2021, AAPS PharmSciTech</span></li>
+            </ul>
+            <figure class="step-fig">
+              <p class="fig-title">Coated mini-tablets</p>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Diagram: three coated mini-tablets, each a drug core inside an outer coating.">
+                <g stroke-width="2">
+                  <rect class="acc" x="40" y="80" width="90" height="100" rx="36" stroke-width="6"/><rect class="acc-wash" x="52" y="92" width="66" height="76" rx="26"/>
+                  <rect class="acc" x="155" y="80" width="90" height="100" rx="36" stroke-width="6"/><rect class="acc-wash" x="167" y="92" width="66" height="76" rx="26"/>
+                  <rect class="acc" x="270" y="80" width="90" height="100" rx="36" stroke-width="6"/><rect class="acc-wash" x="282" y="92" width="66" height="76" rx="26"/>
+                </g>
+                <g class="ink-fill"><circle cx="85" cy="130" r="4"/><circle cx="200" cy="130" r="4"/><circle cx="315" cy="130" r="4"/></g>
+              </svg>
+              <ul><li>Thick outline: coating that holds back release</li><li>Inner core: the drug-loaded mini-tablet</li></ul>
+            </figure>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="flagship night" id="oral-cancer" aria-labelledby="flag-h">
+    <div class="wrap flag-grid">
+      <div>
+        <p class="flag-label"><span class="shape oral" aria-hidden="true"></span>Funded project, ongoing</p>
+        <h2 id="flag-h">Formulation and development of nanofibers using electrospinning technique for locoregional therapy for oral cancer</h2>
+        <p class="body">Treating early oral cancer at the site of the tumour, so that less drug reaches healthy tissue. The group's earlier work loaded erlotinib into liposomes and a gel for local application in the mouth; the current project builds electrospun nanofibre systems for the same purpose.</p>
+        <dl class="grant">
+          <div><dt>Grant</dt><dd class="big">≈ ₹57 lakh</dd></div>
+          <div><dt>Funder</dt><dd>GSBTM, major research project</dd></div>
+          <div><dt>Project</dt><dd>Nanofiber-based drug delivery system for oral cancer</dd></div>
+          <div><dt>Status</dt><dd>Ongoing</dd></div>
+        </dl>
+        <p class="flag-paper"><a href="https://doi.org/10.1016/j.ijpharm.2023.123144">Localized delivery of erlotinib using liposomal gel formulations for the treatment of oral squamous cell carcinoma</a>Hariharan K, Mehta T, Shah J, Dave H, Sami A, Omri A. Int J Pharm 642, 123144 (2023)</p>
+      </div>
+      <figure class="bars">
+        <h3>Tumour volume reduction in vivo</h3>
+        <p class="sub">Erlotinib gels applied locally, compared by formulation</p>
+        <ol role="img" aria-label="Bar chart: tumour volume reduction of 38.88 percent with plain erlotinib gel, 49.19 percent with erlotinib liposomal gel, and 55.27 percent with chitosan-coated erlotinib liposomal gel.">
+          <li><div class="lab"><span>Plain erlotinib gel</span><b>38.88%</b></div><div class="track"><span class="fill" style="--v: 0.648"></span></div></li>
+          <li><div class="lab"><span>Erlotinib liposomal gel</span><b>49.19%</b></div><div class="track"><span class="fill" style="--v: 0.8198"></span></div></li>
+          <li class="best"><div class="lab"><span>Chitosan-coated erlotinib liposomal gel</span><b>55.27%</b></div><div class="track"><span class="fill" style="--v: 0.9212"></span></div></li>
+        </ol>
+        <div class="axis" aria-hidden="true"><span>0%</span><span>20%</span><span>40%</span><span>60%</span></div>
+        <figcaption>Values from the abstract of Hariharan et al., Int J Pharm 2023. Bars drawn to a 0 to 60% scale.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="pubs" id="publications" aria-labelledby="pubs-h">
+    <div class="wrap">
+      <div class="pubs-head">
+        <h2 class="kicker-free-h" id="pubs-h">Publications</h2>
+        <p>Prof. Mehta's faculty profile reports more than 100 research papers. PubMed indexes 38 of them with a Nirma University affiliation. Fourteen are listed here, placed on the years they appeared.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter by theme" hidden>
+        <button type="button" class="chip" data-theme="all" aria-pressed="true">All themes<span class="c">14</span></button>
+        <button type="button" class="chip" data-theme="oral" aria-pressed="false"><span class="shape oral" aria-hidden="true"></span>Oral cancer<span class="c">1</span></button>
+        <button type="button" class="chip" data-theme="site" aria-pressed="false"><span class="shape site" aria-hidden="true"></span>Site-specific<span class="c">4</span></button>
+        <button type="button" class="chip" data-theme="carriers" aria-pressed="false"><span class="shape carriers" aria-hidden="true"></span>Nanocarriers<span class="c">3</span></button>
+        <button type="button" class="chip" data-theme="solubility" aria-pressed="false"><span class="shape solubility" aria-hidden="true"></span>Solubility<span class="c">3</span></button>
+        <button type="button" class="chip" data-theme="reviews" aria-pressed="false"><span class="shape reviews" aria-hidden="true"></span>Reviews<span class="c">3</span></button>
+      </div>
+
+      <figure class="timeline" hidden>
+        <div class="tl-scroll">
+          <div class="tl-cols" role="group" aria-label="Timeline of listed papers, 2011 to 2026">
+            <div class="tl-col" data-year="2011" style="--h: 20%"><div class="tl-marks"></div><span class="tl-year">2011</span></div>
+            <div class="tl-col" data-year="2012" style="--h: 0%"><div class="tl-marks"></div><span class="tl-year">2012</span></div>
+            <div class="tl-col" data-year="2013" style="--h: 0%"><div class="tl-marks"></div><span class="tl-year">2013</span></div>
+            <div class="tl-col" data-year="2014" style="--h: 60%"><div class="tl-marks"></div><span class="tl-year">2014</span></div>
+            <div class="tl-col" data-year="2015" style="--h: 20%"><div class="tl-marks"></div><span class="tl-year">2015</span></div>
+            <div class="tl-col" data-year="2016" style="--h: 80%"><div class="tl-marks"></div><span class="tl-year">2016</span></div>
+            <div class="tl-col" data-year="2017" style="--h: 20%"><div class="tl-marks"></div><span class="tl-year">2017</span></div>
+            <div class="tl-col" data-year="2018" style="--h: 40%"><div class="tl-marks"></div><span class="tl-year">2018</span></div>
+            <div class="tl-col" data-year="2019" style="--h: 60%"><div class="tl-marks"></div><span class="tl-year">2019</span></div>
+            <div class="tl-col" data-year="2020" style="--h: 80%"><div class="tl-marks"></div><span class="tl-year">2020</span></div>
+            <div class="tl-col" data-year="2021" style="--h: 100%"><div class="tl-marks"></div><span class="tl-year">2021</span></div>
+            <div class="tl-col" data-year="2022" style="--h: 60%"><div class="tl-marks"></div><span class="tl-year">2022</span></div>
+            <div class="tl-col" data-year="2023" style="--h: 40%"><div class="tl-marks"></div><span class="tl-year">2023</span></div>
+            <div class="tl-col" data-year="2024" style="--h: 80%"><div class="tl-marks"></div><span class="tl-year">2024</span></div>
+            <div class="tl-col" data-year="2025" style="--h: 40%"><div class="tl-marks"></div><span class="tl-year">2025</span></div>
+            <div class="tl-col" data-year="2026" style="--h: 60%"><div class="tl-marks"></div><span class="tl-year">2026</span></div>
+          </div>
+        </div>
+        <p class="tl-legend"><span><span class="swatch" aria-hidden="true"></span>Grey column: papers PubMed indexes that year, out of a peak of 5 in 2021</span><span>Marks: the papers listed on this page</span></p>
+        <div class="tl-readout" aria-live="polite">
+          <p class="rempty">Select a mark to see the paper.</p>
+        </div>
+        <figcaption class="sr-only">Grey columns count PubMed records with a Nirma University affiliation, November 2026.</figcaption>
+      </figure>
+
+      <div class="list-bar">
+        <h3 id="pub-status" tabindex="-1">14 papers</h3>
+        <a href="https://scholar.google.co.in/citations?user=Yhu3UE8AAAAJ&amp;hl=en">Full list on Google Scholar</a>
+      </div>
+      <ol class="pub-list" id="pub-list">
+        <li data-theme="reviews" data-year="2026" data-kind="Review"><span class="shape reviews" aria-hidden="true"></span><span class="txt"><span class="yr">2026, review</span><a href="https://doi.org/10.1080/17425247.2026.2727678">Vaginal drug delivery for precision therapy in polyendocrine metabolic ovarian syndrome</a><span class="src">Shah S, Parikh A, Garg S, Mehta T. Expert Opin Drug Deliv 23, 1967-1990</span></span></li>
+        <li data-theme="reviews" data-year="2026" data-kind="Review"><span class="shape reviews" aria-hidden="true"></span><span class="txt"><span class="yr">2026, review</span><a href="https://doi.org/10.1080/03639045.2026.2691481">Next-generation drug delivery for age-related macular degeneration: promise of controlled release formulations</a><span class="src">Bangar P, Garkal A, Mehta T. Drug Dev Ind Pharm 52, 1686-1699</span></span></li>
+        <li data-theme="reviews" data-year="2026" data-kind="Review"><span class="shape reviews" aria-hidden="true"></span><span class="txt"><span class="yr">2026, review</span><a href="https://doi.org/10.1208/s12249-026-03426-2">Mesoporous silica nanoparticles for ocular drug delivery: synthesis, functionalization, and safety insights</a><span class="src">Patel L, Mehta T. AAPS PharmSciTech 27(4)</span></span></li>
+        <li data-theme="carriers" data-year="2024" data-kind="Nanocarriers"><span class="shape carriers" aria-hidden="true"></span><span class="txt"><span class="yr">2024</span><a href="https://doi.org/10.1007/s13346-024-01685-9">Quality by design driven development of lipid nanoparticles for cutaneous targeting</a><span class="src">Patel V, Mehta T, Shah J, Soni K. Drug Deliv Transl Res 15, 1393-1410</span></span></li>
+        <li data-theme="oral" data-year="2023" data-kind="Oral cancer"><span class="shape oral" aria-hidden="true"></span><span class="txt"><span class="yr">2023</span><a href="https://doi.org/10.1016/j.ijpharm.2023.123144">Localized delivery of erlotinib using liposomal gel formulations for the treatment of oral squamous cell carcinoma</a><span class="src">Hariharan K, Mehta T, Shah J, Dave H, Sami A, Omri A. Int J Pharm 642, 123144</span></span></li>
+        <li data-theme="solubility" data-year="2022" data-kind="Solubility"><span class="shape solubility" aria-hidden="true"></span><span class="txt"><span class="yr">2022</span><a href="https://doi.org/10.1208/s12249-022-02346-1">Betamethasone dipropionate nanocrystals: investigation, feasibility and in vitro evaluation</a><span class="src">Patel V, Mehta TA. AAPS PharmSciTech 23, 197</span></span></li>
+        <li data-theme="site" data-year="2021" data-kind="Site-specific"><span class="shape site" aria-hidden="true"></span><span class="txt"><span class="yr">2021</span><a href="https://doi.org/10.1208/s12249-021-02132-5">Development and optimization of asenapine sublingual film using QbD approach</a><span class="src">Dalal R, Shah J, Gorain B, et al., Mehta TA. AAPS PharmSciTech 22, 244</span></span></li>
+        <li data-theme="carriers" data-year="2021" data-kind="Nanocarriers"><span class="shape carriers" aria-hidden="true"></span><span class="txt"><span class="yr">2021</span><a href="https://doi.org/10.1016/j.ijpharm.2021.121079">Tacrolimus encapsulated mesoporous silica nanoparticles embedded hydrogel for the treatment of atopic dermatitis</a><span class="src">Parekh K, Hariharan K, Qu Z, et al., Mehta T. Int J Pharm 608, 121079</span></span></li>
+        <li data-theme="carriers" data-year="2020" data-kind="Nanocarriers"><span class="shape carriers" aria-hidden="true"></span><span class="txt"><span class="yr">2020</span><a href="https://doi.org/10.1016/j.xphs.2020.03.028">Formulation of chitosan stabilized silver nanoparticle-containing wound healing film</a><span class="src">Pansara C, Mishra R, Mehta T, Parikh A, Garg S. J Pharm Sci 109, 2196-2205</span></span></li>
+        <li data-theme="solubility" data-year="2020" data-kind="Solubility"><span class="shape solubility" aria-hidden="true"></span><span class="txt"><span class="yr">2020</span><a href="https://doi.org/10.1007/s13346-020-00734-3">Improvement of oral bioavailability of carvedilol by liquisolid compact</a><span class="src">Jhaveri M, Nair AB, Shah J, Jacob S, Patel V, Mehta T. Drug Deliv Transl Res 10, 975-985</span></span></li>
+        <li data-theme="solubility" data-year="2019" data-kind="Solubility"><span class="shape solubility" aria-hidden="true"></span><span class="txt"><span class="yr">2019</span><a href="https://doi.org/10.1208/s12249-019-1368-1">Impact of process parameters on particle size in media milling for clotrimazole nanocrystals</a><span class="src">Patel V, Sharma OP, Mehta TA. AAPS PharmSciTech 20, 175</span></span></li>
+        <li data-theme="site" data-year="2016" data-kind="Site-specific"><span class="shape site" aria-hidden="true"></span><span class="txt"><span class="yr">2016</span><a href="https://doi.org/10.4103/2230-973X.176487">Formulation, development and characterization of mucoadhesive film for treatment of vaginal candidiasis</a><span class="src">Mishra R, Joshi P, Mehta T. Int J Pharm Investig 6, 47-55</span></span></li>
+        <li data-theme="site" data-year="2015" data-kind="Site-specific"><span class="shape site" aria-hidden="true"></span><span class="txt"><span class="yr">2015</span><a href="https://doi.org/10.3109/03639045.2015.1082581">Design of experiment approach for formulating multi-unit colon-targeted drug delivery system</a><span class="src">Shah N, Sharma OP, Mehta T, Amin A. Drug Dev Ind Pharm 42, 825-835</span></span></li>
+        <li data-theme="site" data-year="2014" data-kind="Site-specific"><span class="shape site" aria-hidden="true"></span><span class="txt"><span class="yr">2014</span><a href="https://doi.org/10.1517/17425247.2014.944861">Formulation optimization of gastroretentive drug delivery system for allopurinol using experimental design</a><span class="src">Sharma OP, Shah MV, Parikh DC, Mehta TA. Expert Opin Drug Deliv 12, 513-524</span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="profile" id="profile" aria-labelledby="profile-h">
+    <div class="wrap">
+      <div class="profile-top">
+        <div class="portrait"><img class="od-media" src="assets/official/tejal-mehta.jpg" width="224" height="212" alt="Portrait of Prof. Tejal Mehta"></div>
+        <div>
+          <h2 id="profile-h"><span>Prof. Tejal</span> <span>Mehta</span></h2>
+          <p class="roles">
+            <span>Professor and Head, Department of Pharmaceutics</span>
+            <span>Deputy Director, Internal Quality Assurance Cell, Nirma University</span>
+            <span>PhD, Sardar Patel University, Vallabh Vidyanagar. M.Pharm and B.Pharm, Gujarat University, Ahmedabad</span>
+          </p>
+          <p class="links">
+            <a href="http://orcid.org/0000-0001-7974-7112">ORCID</a>
+            <a href="https://scholar.google.co.in/citations?user=Yhu3UE8AAAAJ&amp;hl=en">Google Scholar</a>
+            <a href="https://pharmacy.nirmauni.ac.in/author/tejalshah/">Faculty profile</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <dl class="record">
+          <div><dt>years of teaching, including research, at UG and PG level</dt><dd>27+</dd></div>
+          <div><dt>research papers in national and international journals</dt><dd>100+</dd></div>
+          <div><dt>chapters in national and international books</dt><dd>15+</dd></div>
+          <div><dt>patents filed, 3 of them granted</dt><dd>5</dd></div>
+          <div><dt>PhD scholars guided</dt><dd>20</dd></div>
+        </dl>
+
+        <div class="cv">
+          <section aria-labelledby="books-h">
+            <h3 id="books-h">Books</h3>
+            <ul>
+              <li><b>Practical Manual of Pharmaceutical Engineering</b>1st and 2nd editions</li>
+              <li><b>Practical Manual of Pharmaceutical Dosage Forms</b></li>
+              <li><b>Pharmaceutical Quality Management and Drug Delivery System</b></li>
+              <li><b>An Essential Guide in Pharmaceutics</b></li>
+            </ul>
+          </section>
+          <section aria-labelledby="awards-h">
+            <h3 id="awards-h">Awards</h3>
+            <ul>
+              <li><b>Best Paper Award 2004</b>Association of Pharmaceutical Teachers of India</li>
+              <li><b>R. V. Patel Best M.Pharm Thesis Award</b>Guide category</li>
+              <li><b>Best Professor Award for Overall Performance</b>Nirma University</li>
+              <li><b>Long Service Award</b>Nirma University</li>
+              <li><b>Prof. M. L. Shroff Pharma Recognition Award</b>Team Pharma Lok</li>
+            </ul>
+          </section>
+          <section class="wide" aria-labelledby="funded-h">
+            <h3 id="funded-h">Funded research</h3>
+            <ul>
+              <li class="proj"><b>Nanofiber-based drug delivery system for oral cancer</b><span>GSBTM, major, approx. ₹57 lakh</span><span>Ongoing</span></li>
+              <li class="proj"><b>Minor research project</b><span>GUJCOST, amount not stated</span><span>Completed</span></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <p class="source-note">Record, books, projects and awards as stated on the Institute of Pharmacy faculty profile, read 17 November 2026.</p>
+    </div>
+  </section>
+
+  <section class="people" id="people" aria-labelledby="people-h">
+    <div class="wrap">
+      <div class="people-head">
+        <h2 class="kicker-free-h" id="people-h">People</h2>
+        <p>Current members of the group, working with Prof. Mehta in the Department of Pharmaceutics.</p>
+      </div>
+      <ul class="members">
+        <li>Anam Sami</li>
+        <li>Lajja Patel</li>
+        <li>Shailvi Shah</li>
+        <li>Priya Patel</li>
+        <li>Priyam Thakar</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="join" id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <div>
+        <h2 id="join-h">Join the group</h2>
+        <p>Prof. Mehta is a recognised PG and PhD guide of Nirma University. Twenty PhD scholars have completed their research with her. Students interested in M.Pharm or PhD research in pharmaceutics can contact her at the department.</p>
+      </div>
+      <dl class="contact" id="contact">
+        <div><dt>Telephone</dt><dd><a class="phone" href="tel:+917971652716">079 7165 2716</a></dd></div>
+        <div><dt>Office</dt><dd>PG Faculty area, PG-204</dd></div>
+        <div><dt>Address</dt><dd>Institute of Pharmacy, Nirma University, Sarkhej-Gandhinagar Highway, Ahmedabad 382481</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot night">
+  <div class="wrap foot-grid">
+    <div>
+      <span class="foot-name">Tejal Mehta Lab</span>
+      <p>Department of Pharmaceutics, Institute of Pharmacy, Nirma University, Sarkhej-Gandhinagar Highway, Ahmedabad 382481, Gujarat, India</p>
+    </div>
+    <div>
+      <h2>Elsewhere</h2>
+      <ul>
+        <li><a href="https://pharmacy.nirmauni.ac.in/author/tejalshah/">Faculty profile</a></li>
+        <li><a href="http://orcid.org/0000-0001-7974-7112">ORCID 0000-0001-7974-7112</a></li>
+        <li><a href="https://scholar.google.co.in/citations?user=Yhu3UE8AAAAJ&amp;hl=en">Google Scholar</a></li>
+      </ul>
+    </div>
+    <nav aria-label="Footer">
+      <h2>On this page</h2>
+      <ul>
+        <li><a href="#journey">Research</a></li>
+        <li><a href="#oral-cancer">Oral cancer project</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#profile">Prof. Mehta</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#join">Join the group</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var mq = function (q) { return window.matchMedia ? window.matchMedia(q) : { matches: false, addEventListener: function () {} }; };
+  var reduceMotion = mq('(prefers-reduced-motion: reduce)');
+  var slice = function (list) { return Array.prototype.slice.call(list); };
+  var clamp = function (v) { return Math.max(0, Math.min(1, v)); };
+
+  /* ---------- 1. The mill: particles shrink from 31 µm to 264 nm as you scroll ---------- */
+  (function mill() {
+    var sec = document.getElementById('mill');
+    if (!sec || reduceMotion.matches) return;
+    var canvas = sec.querySelector('canvas');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    var frame = sec.querySelector('.field-frame');
+    var val = sec.querySelector('.ro-val');
+    var fill = sec.querySelector('.ro-fill');
+    var pinQuery = mq('(min-width: 64rem) and (min-height: 40rem)');
+
+    sec.classList.add('is-live');
+
+    var css = getComputedStyle(document.documentElement);
+    var ink = css.getPropertyValue('--ink').trim() || '#0D1B2A';
+    var amber = css.getPropertyValue('--t-sol').trim() || '#8A5A00';
+    var muted = css.getPropertyValue('--muted').trim() || '#4A5866';
+    var fontFamily = css.getPropertyValue('--font-display').trim() || 'sans-serif';
+
+    var D0 = 31, D1 = 0.264, N = 1500;
+    var seed = 20191;
+    function rand() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+    var pts = [];
+    for (var i = 0; i < N; i++) pts.push({ x: rand(), y: rand(), ph: rand() * Math.PI * 2, sp: 0.4 + rand() * 0.8 });
+
+    var w = 0, h = 0, dpr = 1, p = 0, visible = true, raf = 0;
+
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = Math.max(1, r.width); h = Math.max(1, r.height);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function setPinned() { sec.classList.toggle('is-pinned', pinQuery.matches); }
+
+    function progress() {
+      var vh = window.innerHeight || 800;
+      if (sec.classList.contains('is-pinned')) {
+        var r = sec.getBoundingClientRect();
+        var total = r.height - vh;
+        return total > 0 ? clamp(-r.top / total) : 0;
+      }
+      var fr = frame.getBoundingClientRect();
+      return clamp((vh * 0.85 - fr.top) / (vh * 0.7));
+    }
+
+    function label(d) {
+      if (d >= 1) return d.toFixed(d >= 10 ? 1 : 2) + ' µm';
+      return Math.round(d * 1000) + ' nm';
+    }
+
+    function draw(t) {
+      var d = D0 * Math.pow(D1 / D0, p);
+      var r0 = Math.min(w, h) * 0.16;
+      var pxPerUm = r0 / (D0 / 2);
+      var r = (d / 2) * pxPerUm;
+      var rDraw = Math.max(r, 0.7);
+      var n = Math.min(N, Math.max(5, Math.round(5 * Math.pow(r0 / rDraw, 1.25))));
+      var drift = Math.min(14, 4 + rDraw * 0.1);
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < n; i++) {
+        var pt = pts[i];
+        var x = rDraw + pt.x * (w - 2 * rDraw) + Math.sin(t * 0.00035 * pt.sp + pt.ph) * drift;
+        var y = rDraw + pt.y * (h - 2 * rDraw - 36) + Math.cos(t * 0.0003 * pt.sp + pt.ph) * drift;
+        ctx.beginPath();
+        ctx.arc(x, y, rDraw, 0, Math.PI * 2);
+        if (rDraw > 3) {
+          ctx.globalAlpha = 0.07; ctx.fillStyle = ink; ctx.fill();
+          ctx.globalAlpha = 0.7; ctx.lineWidth = 1.25; ctx.strokeStyle = ink; ctx.stroke();
+        } else {
+          ctx.globalAlpha = 0.75; ctx.fillStyle = i % 9 === 0 ? amber : ink; ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+      /* constant scale bar: 10 µm at this magnification */
+      var bar = 10 * pxPerUm;
+      ctx.fillStyle = ink;
+      ctx.fillRect(16, h - 22, bar, 3);
+      ctx.fillStyle = muted;
+      ctx.font = '600 13px ' + fontFamily;
+      ctx.fillText('10 µm', 16 + bar + 8, h - 17);
+      if (val) val.textContent = label(d);
+      if (fill) fill.style.setProperty('--p', p.toFixed(3));
+    }
+
+    function loop(t) {
+      raf = 0;
+      if (!visible) return;
+      p = progress();
+      draw(t || 0);
+      raf = window.requestAnimationFrame(loop);
+    }
+
+    setPinned();
+    resize();
+    if (pinQuery.addEventListener) pinQuery.addEventListener('change', function () { setPinned(); resize(); });
+    window.addEventListener('resize', resize);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible && !raf) raf = window.requestAnimationFrame(loop);
+      }).observe(sec);
+    }
+    raf = window.requestAnimationFrame(loop);
+  })();
+
+  /* ---------- 2. Where a dose goes: pinned stage on wide screens ---------- */
+  (function journey() {
+    var section = document.getElementById('journey');
+    if (!section) return;
+    var stage = section.querySelector('.stage');
+    var steps = slice(section.querySelectorAll('.step'));
+    if (!stage || !steps.length) return;
+    var clones = steps.map(function (step, i) {
+      var fig = step.querySelector('.step-fig');
+      var c = fig.cloneNode(true);
+      c.style.setProperty('--acc', step.style.getPropertyValue('--acc'));
+      c.hidden = i !== 0;
+      stage.appendChild(c);
+      return c;
+    });
+    var active = -1;
+    function activate(i) {
+      if (i === active) return;
+      active = i;
+      steps.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
+      clones.forEach(function (c, j) {
+        c.hidden = j !== i;
+        if (j === i) { c.classList.remove('enter'); void c.offsetWidth; c.classList.add('enter'); }
+      });
+    }
+    activate(0);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) activate(steps.indexOf(e.target)); });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      steps.forEach(function (s) { io.observe(s); });
+    }
+  })();
+
+  /* ---------- 3. Publications: timeline marks, theme filter, list ---------- */
+  (function pubs() {
+    var list = document.getElementById('pub-list');
+    if (!list) return;
+    var items = slice(list.querySelectorAll(':scope > li'));
+    var filterBar = document.querySelector('#publications .filters');
+    var chips = filterBar ? slice(filterBar.querySelectorAll('.chip')) : [];
+    var timeline = document.querySelector('#publications .timeline');
+    var readout = timeline ? timeline.querySelector('.tl-readout') : null;
+    var status = document.getElementById('pub-status');
+    var names = { oral: 'oral cancer', site: 'site-specific delivery', carriers: 'nanocarriers', solubility: 'solubility', reviews: 'reviews' };
+    var state = { theme: 'all', selected: null };
+    var marks = [];
+
+    if (timeline) {
+      items.forEach(function (li, idx) {
+        var col = timeline.querySelector('.tl-col[data-year="' + li.getAttribute('data-year') + '"] .tl-marks');
+        if (!col) return;
+        var a = li.querySelector('a');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mark';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', li.getAttribute('data-year') + ', ' + li.getAttribute('data-kind') + ': ' + a.textContent);
+        btn.setAttribute('data-idx', String(idx));
+        var s = document.createElement('span');
+        s.className = 'shape ' + li.getAttribute('data-theme');
+        s.setAttribute('aria-hidden', 'true');
+        btn.appendChild(s);
+        col.appendChild(btn);
+        marks.push(btn);
+      });
+      timeline.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.mark') : null;
+        if (!btn) return;
+        var idx = parseInt(btn.getAttribute('data-idx'), 10);
+        state.selected = state.selected === idx ? null : idx;
+        render();
+      });
+      timeline.hidden = false;
+    }
+
+    function showReadout() {
+      if (!readout) return;
+      readout.textContent = '';
+      if (state.selected === null) {
+        var p = document.createElement('p');
+        p.className = 'rempty';
+        p.textContent = 'Select a mark to see the paper.';
+        readout.appendChild(p);
+        return;
+      }
+      var li = items[state.selected];
+      var a = li.querySelector('a');
+      var src = li.querySelector('.src');
+      var k = document.createElement('p');
+      k.className = 'rk';
+      var sh = document.createElement('span');
+      sh.className = 'shape ' + li.getAttribute('data-theme');
+      sh.setAttribute('aria-hidden', 'true');
+      k.appendChild(sh);
+      k.appendChild(document.createTextNode(li.getAttribute('data-year') + ', ' + li.getAttribute('data-kind')));
+      var link = document.createElement('a');
+      link.href = a.href;
+      link.textContent = a.textContent;
+      var rs = document.createElement('span');
+      rs.className = 'rs';
+      rs.textContent = src ? src.textContent : '';
+      readout.appendChild(k); readout.appendChild(link); readout.appendChild(rs);
+    }
+
+    function render() {
+      var shown = 0;
+      items.forEach(function (li) {
+        var ok = state.theme === 'all' || li.getAttribute('data-theme') === state.theme;
+        li.hidden = !ok;
+        if (ok) shown++;
+      });
+      marks.forEach(function (m) {
+        var li = items[parseInt(m.getAttribute('data-idx'), 10)];
+        var ok = state.theme === 'all' || li.getAttribute('data-theme') === state.theme;
+        m.classList.toggle('dim', !ok);
+        m.setAttribute('aria-pressed', String(parseInt(m.getAttribute('data-idx'), 10) === state.selected));
+      });
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-theme') === state.theme ? 'true' : 'false'); });
+      if (status) status.textContent = state.theme === 'all' ? items.length + ' papers' : shown + ' of ' + items.length + ' papers, ' + names[state.theme];
+      showReadout();
+    }
+
+    if (filterBar) {
+      filterBar.hidden = false;
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () {
+          state.theme = c.getAttribute('data-theme');
+          if (state.selected !== null && state.theme !== 'all' && items[state.selected].getAttribute('data-theme') !== state.theme) state.selected = null;
+          render();
+        });
+      });
+    }
+    render();
+  })();
+})();
+</script>
+</body>
+</html>
