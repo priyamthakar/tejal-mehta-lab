@@ -345,7 +345,9 @@ a:hover { text-decoration-color: var(--ink); text-decoration-thickness: 2px; }
 .people .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-8) var(--space-16); align-items: start; }
 .people-head p { margin-top: var(--space-6); font-size: var(--text-lg); line-height: 1.5; color: var(--muted); max-width: 40ch; }
 .members { border-top: 2px solid var(--ink); }
-.members li { padding-block: var(--space-5); border-bottom: 1px solid var(--rule); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 680; font-variation-settings: var(--wide); line-height: 1.1; letter-spacing: -0.01em; }
+.members li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-1) var(--space-6); padding-block: var(--space-5); border-bottom: 1px solid var(--rule); font-family: var(--font-display); }
+.members b { font-size: var(--text-2xl); font-weight: 680; font-variation-settings: var(--wide); line-height: 1.1; letter-spacing: -0.01em; }
+.members span { font-size: var(--text-base); font-weight: 560; color: var(--muted); }
 
 /* ---------- Join ---------- */
 .join { padding-block: var(--space-24); background: var(--surface); border-top: 1px solid var(--rule); }
@@ -746,14 +748,14 @@ a:hover { text-decoration-color: var(--ink); text-decoration-thickness: 2px; }
     <div class="wrap">
       <div class="people-head">
         <h2 class="kicker-free-h" id="people-h">People</h2>
-        <p>Current members of the group, working with Prof. Mehta in the Department of Pharmaceutics.</p>
+        <p>Current members of the group, each pursuing a PhD with Prof. Mehta in the Department of Pharmaceutics.</p>
       </div>
       <ul class="members">
-        <li>Anam Sami</li>
-        <li>Lajja Patel</li>
-        <li>Shailvi Shah</li>
-        <li>Priya Patel</li>
-        <li>Priyam Thakar</li>
+        <li><b>Anam Sami</b><span>PhD scholar</span></li>
+        <li><b>Lajja Patel</b><span>PhD scholar</span></li>
+        <li><b>Shailvi Shah</b><span>PhD scholar</span></li>
+        <li><b>Priya Patel</b><span>PhD scholar</span></li>
+        <li><b>Priyam Thakar</b><span>PhD scholar</span></li>
       </ul>
     </div>
   </section>
